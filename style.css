@@ -1,0 +1,1047 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  color: white;
+  text-align: center;
+  padding: 28px 15px;
+}
+
+header h1 {
+  font-size: 32px;
+  margin-bottom: 6px;
+}
+
+header p {
+  opacity: 0.9;
+}
+
+/* MAIN */
+main {
+  width: 90%;
+  max-width: 1200px;
+  margin: 25px auto;
+}
+
+/* SEARCH */
+.search-box {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px #0001;
+  margin-bottom: 25px;
+}
+
+.search-box h2 {
+  margin-bottom: 18px;
+}
+
+.inputs {
+  display: flex;
+  gap: 12px;
+}
+
+.inputs input {
+  flex: 1;
+  padding: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+#findBtn {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+#error {
+  color: #dc2626;
+  margin-top: 10px;
+}
+
+/* MAP */
+.map {
+  height: 350px;
+  background: #dbeafe;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 25px;
+  border: 2px solid #bfdbfe;
+}
+
+.map-title {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  z-index: 10;
+  box-shadow: 0 3px 10px #0002;
+}
+
+.road {
+  position: absolute;
+  background: #94a3b8;
+  border-radius: 10px;
+}
+
+.road1 {
+  width: 100%;
+  height: 28px;
+  top: 45%;
+  transform: rotate(-12deg);
+}
+
+.road2 {
+  width: 80%;
+  height: 25px;
+  top: 65%;
+  left: 10%;
+  transform: rotate(18deg);
+}
+
+.road3 {
+  width: 75%;
+  height: 22px;
+  top: 25%;
+  left: 15%;
+  transform: rotate(5deg);
+}
+
+/* ROUTE LINES */
+.route-line {
+  position: absolute;
+  height: 7px;
+  border-radius: 10px;
+  transform-origin: left;
+  z-index: 2;
+}
+
+.safe-line {
+  width: 65%;
+  top: 72%;
+  left: 12%;
+  transform: rotate(-25deg);
+  background: #16a34a;
+}
+
+.fast-line {
+  width: 60%;
+  top: 42%;
+  left: 15%;
+  transform: rotate(18deg);
+  background: #dc2626;
+}
+
+.balanced-line {
+  width: 62%;
+  top: 55%;
+  left: 12%;
+  transform: rotate(-5deg);
+  background: #2563eb;
+}
+
+/* MAP MARKERS */
+.marker,
+.help-marker {
+  position: absolute;
+  cursor: pointer;
+  z-index: 7;
+  transition: 0.2s;
+}
+
+.marker {
+  font-size: 25px;
+}
+
+.marker:hover,
+.help-marker:hover {
+  transform: scale(1.3);
+}
+
+.marker.risk {
+  top: 35%;
+  left: 55%;
+}
+
+.marker.cctv {
+  top: 58%;
+  left: 45%;
+}
+
+.marker.safe {
+  top: 68%;
+  left: 72%;
+}
+
+.map-start {
+  position: absolute;
+  left: 8%;
+  bottom: 15%;
+  font-weight: bold;
+  z-index: 8;
+}
+
+.map-end {
+  position: absolute;
+  right: 8%;
+  top: 18%;
+  font-weight: bold;
+  z-index: 8;
+}
+
+/* HELP POINTS */
+.shop {
+  top: 25%;
+  left: 35%;
+}
+
+.pharmacy {
+  top: 55%;
+  left: 65%;
+}
+
+.petrol {
+  top: 70%;
+  left: 25%;
+}
+
+.help-marker {
+  font-size: 22px;
+  background: white;
+  padding: 5px;
+  border-radius: 50%;
+  box-shadow: 0 3px 10px #0003;
+}
+
+/* INFO POPUPS */
+.marker-info,
+.help-info {
+  position: absolute;
+  bottom: 15px;
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px #0003;
+  font-size: 13px;
+  z-index: 9;
+}
+
+.marker-info {
+  left: 15px;
+}
+
+.help-info {
+  right: 15px;
+}
+
+/* LEGEND */
+.map-legend {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  z-index: 10;
+}
+
+/* ROUTES */
+.routes {
+  margin-bottom: 25px;
+}
+
+.routes h2 {
+  margin-bottom: 15px;
+}
+
+.route-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.route-card {
+  background: white;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px #0001;
+  transition: 0.3s;
+  position: relative;
+}
+
+.route-card:hover {
+  transform: translateY(-4px);
+}
+
+.route-card.selected {
+  transform: scale(1.03);
+  border: 3px solid #2563eb;
+  box-shadow: 0 0 20px #2563eb33;
+}
+
+.route-card h3 {
+  margin-bottom: 10px;
+}
+
+.route-card p {
+  margin: 8px 0;
+  color: #64748b;
+}
+
+.score {
+  font-size: 30px;
+  font-weight: bold;
+  color: #16a34a;
+  margin: 12px 0;
+}
+
+.score.medium {
+  color: #ea580c;
+}
+
+.tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #dcfce7;
+  color: #166534;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* INFO GRID */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.info-card {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px #0001;
+}
+
+.info-card h3 {
+  margin-bottom: 12px;
+}
+
+.info-card p {
+  margin: 7px 0;
+}
+
+.high {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.big {
+  font-size: 30px;
+  font-weight: bold;
+  color: #2563eb;
+}
+
+/* SIMULATOR */
+.innovation {
+  background: #0f172a;
+  color: white;
+  padding: 25px;
+  border-radius: 16px;
+  margin-bottom: 25px;
+}
+
+.innovation p {
+  margin: 10px 0 18px;
+  color: #cbd5e1;
+}
+
+.innovation label {
+  display: block;
+  margin: 12px 0;
+}
+
+#simulation {
+  margin-top: 20px;
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+  line-height: 1.7;
+  transition: 0.3s;
+}
+
+/* EXTRA FEATURES */
+.extra {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.extra > div {
+  background: white;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px #0001;
+}
+
+.extra h3 {
+  margin-bottom: 15px;
+}
+
+.extra input,
+.extra select {
+  padding: 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  margin-right: 8px;
+}
+
+.extra p {
+  margin-top: 15px;
+  line-height: 1.6;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 25px;
+  background: #0f172a;
+  color: white;
+}
+
+/* MOBILE */
+@media (max-width: 800px) {
+
+  main {
+    width: 94%;
+  }
+
+  .inputs {
+    flex-direction: column;
+  }
+
+  .route-container {
+    grid-template-columns: 1fr;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .extra {
+    grid-template-columns: 1fr;
+  }
+
+  .map {
+    height: 320px;
+  }
+
+  .map-legend {
+    font-size: 11px;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 500px) {
+
+  header h1 {
+    font-size: 25px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .map-legend {
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .marker-info,
+  .help-info {
+    max-width: 180px;
+    font-size: 11px;
+  }
+}
+.score-breakdown {
+  background: #f8fafc;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 10px;
+  font-size: 13px;
+  border-left: 4px solid #16a34a;
+}
+
+.score-breakdown p {
+  margin: 5px 0;
+  color: #475569;
+}
+
+.score-breakdown strong {
+  color: #166534;
+}
+.unknown-warning {
+  display: none;
+  margin-top: 12px;
+  padding: 10px;
+  background: #fef3c7;
+  color: #92400e;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.confidence-medium {
+  color: #d97706 !important;
+}
+
+.confidence-low {
+  color: #dc2626 !important;
+}
+/* ============================= */
+/* BUTTON POLISH */
+/* ============================= */
+
+/* Route detail buttons */
+.route-card button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: 0.2s ease;
+}
+
+.route-card button:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px #2563eb44;
+}
+
+/* Group Route + Safe Exit buttons */
+.extra button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 11px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.extra button:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px #2563eb44;
+}
+
+/* Inputs and dropdown */
+.extra input,
+.extra select {
+  background: white;
+  color: #334155;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.extra input:focus,
+.extra select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px #2563eb22;
+}
+
+/* Better spacing for result messages */
+#groupResult,
+#exitResult {
+  padding: 10px;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+/* Mobile button adjustment */
+@media (max-width: 500px) {
+  .extra button {
+    margin-top: 8px;
+  }
+
+  .route-card button {
+    width: 100%;
+  }
+}
+/* =========================================
+   ROUTEGUARD - MODERN DARK DASHBOARD STYLE
+   ========================================= */
+
+body {
+  background: linear-gradient(135deg, #eef2ff, #e0f2fe, #f0fdf4);
+  color: #172033;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, #07111f, #0f2a43, #123c52);
+  box-shadow: 0 8px 25px #0f172a33;
+}
+
+/* Search section */
+.search-box {
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 10px 30px #0f172a18;
+}
+
+.search-box h2 {
+  color: #0f172a;
+}
+
+/* Inputs */
+.inputs input {
+  background: #f8fafc;
+  border: 2px solid #cbd5e1;
+}
+
+.inputs input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px #2563eb20;
+}
+
+/* Main Find Route button */
+.inputs button {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 5px 15px #2563eb44;
+}
+
+/* MAP */
+.map {
+  background: linear-gradient(135deg, #dbeafe, #ccfbf1);
+  border: 2px solid #93c5fd;
+  box-shadow: 0 10px 30px #0f172a20;
+}
+
+/* Route cards */
+.route-card {
+  background: linear-gradient(145deg, #ffffff, #f1f5f9);
+  border: 1px solid #dbeafe;
+  box-shadow: 0 8px 25px #0f172a18;
+}
+
+.route-card:hover {
+  box-shadow: 0 12px 30px #2563eb25;
+}
+
+/* Recommended safest card */
+.route-card.safest {
+  background: linear-gradient(145deg, #f0fdf4, #dcfce7);
+  border: 2px solid #86efac;
+}
+
+/* Fastest route */
+.route-card:nth-child(2) {
+  background: linear-gradient(145deg, #fff7ed, #ffedd5);
+  border-color: #fed7aa;
+}
+
+/* Balanced route */
+.route-card:nth-child(3) {
+  background: linear-gradient(145deg, #eff6ff, #dbeafe);
+  border-color: #93c5fd;
+}
+
+/* Selected route */
+.route-card.selected {
+  border: 3px solid #2563eb;
+  box-shadow: 0 0 25px #2563eb44;
+}
+
+/* Score colors */
+.route-card .score {
+  text-shadow: 0 2px 5px #00000012;
+}
+
+/* Information cards */
+.info-card {
+  background: linear-gradient(145deg, #ffffff, #eef2ff);
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 8px 25px #0f172a15;
+  transition: 0.25s;
+}
+
+.info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px #2563eb20;
+}
+
+/* Data confidence */
+.info-card:nth-child(2) {
+  background: linear-gradient(145deg, #f0fdf4, #dcfce7);
+  border-color: #86efac;
+}
+
+/* CCTV */
+.info-card:nth-child(3) {
+  background: linear-gradient(145deg, #eff6ff, #dbeafe);
+  border-color: #93c5fd;
+}
+
+/* Help points */
+.info-card:nth-child(4) {
+  background: linear-gradient(145deg, #faf5ff, #f3e8ff);
+  border-color: #d8b4fe;
+}
+
+/* Risk points */
+.info-card:nth-child(1) {
+  background: linear-gradient(145deg, #fff7ed, #ffedd5);
+  border-color: #fdba74;
+}
+
+/* Simulator */
+.innovation {
+  background: linear-gradient(135deg, #07111f, #102a43, #123c52);
+  border: 1px solid #334155;
+  box-shadow: 0 12px 35px #0f172a40;
+}
+
+#simulation {
+  background: linear-gradient(135deg, #172554, #0f3b4f);
+  border: 1px solid #334155;
+}
+
+/* Group + Exit sections */
+.extra > div {
+  background: linear-gradient(145deg, #ffffff, #eef2ff);
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 8px 25px #0f172a18;
+}
+
+/* Group Route */
+.extra > div:first-child {
+  background: linear-gradient(145deg, #eff6ff, #dbeafe);
+  border-color: #93c5fd;
+}
+
+/* Safe Exit */
+.extra > div:last-child {
+  background: linear-gradient(145deg, #f0fdf4, #dcfce7);
+  border-color: #86efac;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 4px 12px #2563eb35;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  box-shadow: 0 7px 18px #2563eb50;
+}
+
+/* Route buttons */
+.route-card button {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(135deg, #07111f, #0f2a43, #123c52);
+  box-shadow: 0 -5px 20px #0f172a20;
+}
+
+/* Unknown data warning */
+.unknown-warning {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 1px solid #f59e0b;
+}
+
+/* Score breakdown */
+.score-breakdown {
+  background: #ffffffaa;
+  backdrop-filter: blur(5px);
+  border-left: 4px solid #16a34a;
+}
+/* Tourist Spot */
+.tourist-marker {
+  position: absolute;
+  top: 30%;
+  left: 80%;
+  font-size: 24px;
+  background: #fff7ed;
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 8;
+  box-shadow: 0 3px 10px #0003;
+  transition: 0.2s;
+}
+
+.tourist-marker:hover {
+  transform: scale(1.3);
+}
+
+.tourist-info {
+  display: none;
+  position: absolute;
+  top: 65px;
+  right: 15px;
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px #0003;
+  font-size: 13px;
+  z-index: 10;
+}
+/* =================================
+   MAP TIME BACKGROUND
+   ================================= */
+
+.map {
+  transition: background 0.6s ease;
+}
+
+/* Morning */
+.map.morning {
+  background: linear-gradient(
+    135deg,
+    #fef3c7,
+    #dbeafe,
+    #dcfce7
+  );
+}
+
+/* Afternoon */
+.map.afternoon {
+  background: linear-gradient(
+    135deg,
+    #bae6fd,
+    #dbeafe,
+    #bbf7d0
+  );
+}
+
+/* Evening */
+.map.evening {
+  background: linear-gradient(
+    135deg,
+    #fed7aa,
+    #fdba74,
+    #c4b5fd
+  );
+}
+
+/* Night */
+.map.night {
+  background: linear-gradient(
+    135deg,
+    #020617,
+    #0f172a,
+    #172554
+  );
+}
+
+/* Time buttons */
+.time-selector {
+  position: absolute;
+  top: 65px;
+  right: 15px;
+  z-index: 20;
+
+  display: flex;
+  gap: 5px;
+
+  background: rgba(255, 255, 255, 0.9);
+  padding: 7px;
+  border-radius: 12px;
+
+  box-shadow: 0 4px 15px #0003;
+}
+
+.time-selector button {
+  padding: 7px 10px;
+  font-size: 11px;
+  border-radius: 7px;
+  background: #334155;
+  color: white;
+  box-shadow: none;
+}
+
+.time-selector button:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+/* Night mode - make roads slightly visible */
+.map.night .road {
+  background: #334155;
+}
+
+.map.night .route-line {
+  filter: brightness(1.15);
+}
+
+.map.night .map-title,
+.map.night .map-legend {
+  background: #1e293b;
+  color: white;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .time-selector {
+    top: 60px;
+    right: 8px;
+    gap: 3px;
+    padding: 5px;
+  }
+
+  .time-selector button {
+    padding: 5px 7px;
+    font-size: 9px;
+  }
+}
+/* =====================================
+   FULL PAGE TIME-BASED BACKGROUND
+   ===================================== */
+
+body {
+  transition: background 0.8s ease;
+  background: linear-gradient(
+    135deg,
+    #dbeafe,
+    #fef3c7,
+    #dcfce7
+  );
+}
+
+/* Morning */
+body.morning {
+  background:
+    radial-gradient(circle at 15% 15%, #fde68a 0 5%, transparent 20%),
+    linear-gradient(135deg, #bae6fd, #fef3c7, #dcfce7);
+}
+
+/* Afternoon */
+body.afternoon {
+  background:
+    radial-gradient(circle at 80% 15%, #fef08a 0 5%, transparent 18%),
+    linear-gradient(135deg, #7dd3fc, #dbeafe, #bbf7d0);
+}
+
+/* Evening */
+body.evening {
+  background:
+    radial-gradient(circle at 80% 15%, #fb923c 0 5%, transparent 20%),
+    linear-gradient(135deg, #fdba74, #c4b5fd, #fda4af);
+}
+
+/* Night */
+body.night {
+  background:
+    radial-gradient(circle at 80% 15%, #f8fafc 0 2%, transparent 12%),
+    radial-gradient(circle at 20% 25%, #ffffff 0 1%, transparent 2%),
+    radial-gradient(circle at 65% 35%, #ffffff 0 1%, transparent 2%),
+    linear-gradient(135deg, #020617, #0f172a, #172554);
+}
+
+/* Time selector */
+.background-time {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+
+  display: flex;
+  gap: 5px;
+
+  padding: 7px;
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 5px 20px #0003;
+}
+
+.background-time button {
+  border: none;
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-size: 11px;
+  cursor: pointer;
+  background: #1e293b;
+  color: white;
+}
+
+.background-time button:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+/* Make sections slightly transparent so background is visible */
+.search-box,
+.route-card,
+.info-card,
+.extra > div {
+  background-color: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(6px);
+}
+
+/* Night mode text visibility */
+body.night {
+  color: #e2e8f0;
+}
+
+body.night .search-box,
+body.night .route-card,
+body.night .info-card,
+body.night .extra > div {
+  background-color: rgba(15, 23, 42, 0.88);
+  color: #e2e8f0;
+}
+
+body.night .route-card p,
+body.night .info-card p,
+body.night .extra p {
+  color: #cbd5e1;
+}
