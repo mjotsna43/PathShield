@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RouteGuard | Safe Route Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="background-time">
+  <button onclick="changeBackground('morning')">🌅 Morning</button>
+  <button onclick="changeBackground('afternoon')">☀️ Afternoon</button>
+  <button onclick="changeBackground('evening')">🌇 Evening</button>
+  <button onclick="changeBackground('night')">🌙 Night</button>
+</div>
+
+  <header>
+    <h1>🛡️ PathShield</h1>
+    <p>Intelligent Safe Route Planner</p>
+  </header>
+
+  <main>
+
+    <!-- Source & Destination -->
+    <section class="search-box">
+      <h2>Plan Your Safe Route</h2>
+
+      <div class="inputs">
+        <input id="source" type="text" placeholder="📍 Enter starting point">
+        <input id="destination" type="text" placeholder="🏁 Enter destination">
+        <button id="findBtn" onclick="findRoutes()">Find Safe Routes</button>
+      </div>
+
+      <p id="error"></p>
+    </section>
+
+    <!-- Map -->
+    <section class="map">
+      <div class="map-title">🗺️ Safety Map</div>
+      <div class="time-selector">
+  <button onclick="changeMapTime('morning')">🌅 Morning</button>
+  <button onclick="changeMapTime('afternoon')">☀️ Afternoon</button>
+  <button onclick="changeMapTime('evening')">🌇 Evening</button>
+  <button onclick="changeMapTime('night')">🌙 Night</button>
+</div>
+
+      <div class="road road1"></div>
+      <div class="road road2"></div>
+      <div class="road road3"></div>
+      <div class="route-line safe-line"></div>
+<div class="route-line fast-line"></div>
+<div class="route-line balanced-line"></div>
+      <div class="marker risk" onclick="markerInfo('risk')">⚠️</div>
+<div class="marker cctv" onclick="markerInfo('cctv')">📹</div>
+<div class="marker safe" onclick="markerInfo('safe')">🟢</div>
+<!-- clickable map markers -->
+<div class="marker risk" onclick="markerInfo('risk')">⚠️</div>
+<div class="marker cctv" onclick="markerInfo('cctv')">📹</div>
+<div class="marker safe" onclick="markerInfo('safe')">🟢</div>
+
+<div class="map-start">📍</div>
+<div class="map-end">🏁</div>
+<div id="markerInfo" class="marker-info"></div>
+
+      <div class="map-start">📍</div>
+      <div class="map-end">🏁</div>
+      <div class="help-marker shop" onclick="helpInfo('shop')">🏪</div>
+  <div class="help-marker pharmacy" onclick="helpInfo('pharmacy')">💊</div>
+  <div class="help-marker petrol" onclick="helpInfo('petrol')">⛽</div>
+
+  <div id="helpInfo" class="help-info"></div>
+  <div class="map-legend">
+  <span>🟢 Safest</span>
+  <span>🔴 Fastest</span>
+  <span>🔵 Balanced</span>
+</div>
+</div>
+    </section>
+
+    <!-- Route Results -->
+    <section id="routes" class="routes">
+
+      <h2>Recommended Routes</h2>
+
+      <div class="route-container">
+
+        <div class="route-card safest">
+          <span class="tag">RECOMMENDED</span>
+          <h3>🛡️ Safest Route</h3>
+          <p>4.2 km • 12 min</p>
+          <div class="score" id="safeScore">91/100</div>
+          <div class="score-breakdown" id="safeBreakdown">
+          <p>💡 Lighting: <strong>24/25</strong></p>
+          <p>📹 CCTV: <strong>22/25</strong></p>
+          <p>🚨 Risk Level: <strong>23/25</strong></p>
+          <p>🏪 Help Points: <strong>22/25</strong></p>
+</div>
+          <p>📹 85% CCTV &nbsp; 💡 Well Lit</p>
+          <button onclick="selectRoute('safe')">View Route Details</button>
+        </div>
+
+        <div class="route-card">
+          <h3>⚡ Fastest Route</h3>
+          <p>3.5 km • 8 min</p>
+          <div class="score medium" id="fastScore">68/100</div>
+          <p>⚠️ 2 Risk Points</p>
+          <button onclick="selectRoute('fast')">View Route Details</button>
+        </div>
+
+        <div class="route-card">
+          <h3>⚖️ Balanced Route</h3>
+          <p>3.9 km • 10 min</p>
+          <div class="score" id="balancedScore">82/100</div>
+          <p>📹 70% CCTV &nbsp; 👥 Crowded</p>
+          <button onclick="selectRoute('balanced')">View Route Details</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Safety Information -->
+    <section class="info-grid">
+
+      <div class="info-card">
+        <h3>🏷️ Risk Points</h3>
+        <p>⚠️ Poor Lighting</p>
+        <p>📹 No CCTV</p>
+        <p>🚶 Isolated Area</p>
+        <p>🚨 Reported Incident</p>
+      </div>
+
+      <div class="info-card">
+  <h3>🟢 Data Confidence</h3>
+
+  <p class="high" id="confidenceLevel">
+    HIGH CONFIDENCE
+  </p>
+
+  <small id="confidenceText">
+    Based on multiple safety data sources.
+  </small>
+
+  <div id="unknownWarning" class="unknown-warning">
+    ⚠️ Insufficient Safety Data
+  </div>
+</div>
+
+      <div class="info-card">
+        <h3>📹 CCTV Coverage</h3>
+        <p class="big">85%</p>
+        <small>Demo coverage along selected route</small>
+      </div>
+
+      <div class="info-card">
+        <h3>🏪 Safe Help Points</h3>
+        <p>🏪 Shops: 4</p>
+        <p>💊 Pharmacies: 2</p>
+        <p>⛽ Petrol Pumps: 1</p>
+      </div>
+
+    </section>
+
+    <!-- Innovation -->
+    <section class="innovation">
+
+      <h2>🔄 Route Safety Simulator</h2>
+      <p>Change conditions and see how the recommendation changes.</p>
+
+      <label>
+        <input type="checkbox" id="cctvToggle" onchange="simulate()">
+        CCTV unavailable
+      </label>
+
+      <label>
+        <input type="checkbox" id="roadToggle" onchange="simulate()">
+        Road closed
+      </label>
+
+      <label>
+        <input type="checkbox" id="riskToggle" onchange="simulate()">
+        New risk reported
+      </label>
+
+      <div id="simulation">
+        Current Safety Score: <strong>91/100</strong>
+      </div>
+
+    </section>
+
+    <!-- Extra Features -->
+    <section class="extra">
+
+      <div>
+        <h3>👥 Group-Safe Route</h3>
+        <input id="people" type="number" min="1" placeholder="Number of travellers">
+        <button onclick="groupRoute()">Find Group Route</button>
+        <p id="groupResult"></p>
+      </div>
+
+      <div>
+        <h3>🚪 Safe Exit Finder</h3>
+        <select id="place">
+          <option>College</option>
+          <option>Shopping Mall</option>
+          <option>Metro Station</option>
+          <option>Bus Station</option>
+        </select>
+        <button onclick="findExit()">Find Safe Exit</button>
+        <p id="exitResult"></p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>🛡️ RouteGuard — Navigate Smart. Travel Safe.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
